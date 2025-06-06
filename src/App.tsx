@@ -1,9 +1,10 @@
+import LoginPage from "./pages/Login/LoginPage"
 
 
 const App = () => {
   return (
     <div>
-      <h1>App component</h1>
+      <LoginPage/>
     </div>
   )
 }
