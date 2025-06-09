@@ -1,22 +1,27 @@
 import { Button, Form, Input, Card } from "antd";
-// import useAppStore from "../../store/useAppStore";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../store/useAuth";
+import { useEffect } from "react";
 const LoginPage = () => {
   const login = useAuth((state) => state.login);
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onLogin = (values: any) => {
-    const { email, password } = values;
-    if (email === "admin@dms.com" && password === "admin123") {
-      login();
-      alert("Login Successful...");
+  useEffect(() => {
+    if (isAuthenticated) {
       navigate("/app/documents");
-    } else {
-      alert("invalid credentials");
     }
-  };
+  }, [isAuthenticated, navigate]);
+
+ const onLogin = (values: any) => {
+  const { email, password } = values;
+  if (email === "admin@dms.com" && password === "admin123") {
+    login();
+    alert("Login Successful...");
+  } else {
+    alert("Invalid credentials");
+  }
+};
 
   return (
     <div>
