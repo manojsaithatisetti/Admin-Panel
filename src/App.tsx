@@ -1,22 +1,38 @@
-import { Route, Routes } from "react-router-dom"
-import LoginPage from "./pages/Login/LoginPage"
-import DocumentsPage from "./pages/Documents/DocumentsPage"
-import ProtectedRoute from "./components/ProtectedRoute"
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/Login/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import useAuth from './store/useAuth';
+import DocumentsPage from './components/DocumentsPage';
 
 const App = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
-    <div>
-        <Routes>
-  <Route path="/login" element={<LoginPage />} />
-  <Route element={<ProtectedRoute />}>
-    <Route path="/app/documents" element={<DocumentsPage />} />
-  </Route>
-</Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/app/documents" replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/app/documents"
+          element={
+            <ProtectedRoute>
+              <DocumentsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-
-    </div>
-  )
-}
-
-export default App
+export default App;

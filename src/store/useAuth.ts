@@ -1,21 +1,21 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface AuthState {
-  isAuthenticated: boolean;
-  login: () => void;
+  isLoggedIn: boolean;
+  login: (email: string, password: string) => boolean;
   logout: () => void;
 }
 
 const useAuth = create<AuthState>((set) => ({
-  isAuthenticated: localStorage.getItem("auth") === "true",
-  login: () => {
-    localStorage.setItem("auth", "true");
-    set({ isAuthenticated: true });
+  isLoggedIn: false,
+  login: (email, password) => {
+    const isValid = email === 'admin@dms.com' && password === 'admin123';
+    if (isValid) {
+      set({ isLoggedIn: true });
+    }
+    return isValid;
   },
-  logout: () => {
-    localStorage.removeItem("auth");
-    set({ isAuthenticated: false });
-  },
+  logout: () => set({ isLoggedIn: false }),
 }));
 
 export default useAuth;

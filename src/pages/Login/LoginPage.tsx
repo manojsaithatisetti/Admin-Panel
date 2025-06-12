@@ -1,32 +1,31 @@
 import { Button, Form, Input, Card } from "antd";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../store/useAuth";
-import { useEffect } from "react";
 const LoginPage = () => {
-  const login = useAuth((state) => state.login);
-  const isAuthenticated = useAuth((state) => state.isAuthenticated);
+ const { login, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/app/documents");
+  const onFinish = (values: { email: string; password: string }) => {
+    const { email, password } = values;
+    const isValid = login(email, password);
+    if (isValid) {
+      alert('Login successful');
+      navigate('/app/documents');
+    } else {
+      alert('Invalid credentials');
     }
-  }, [isAuthenticated, navigate]);
+  };
 
- const onLogin = (values: any) => {
-  const { email, password } = values;
-  if (email === "admin@dms.com" && password === "admin123") {
-    login();
-    alert("Login Successful...");
-  } else {
-    alert("Invalid credentials");
+  if (isLoggedIn) {
+    navigate('/app/documents');
+    return null;
   }
-};
+
 
   return (
     <div>
       <Card title={<h2>Admin Login</h2>}>
-        <Form name="login" onFinish={onLogin} layout="vertical">
+        <Form name="login" onFinish={onFinish} layout="vertical">
           <Form.Item
             name="email"
             label="email"
