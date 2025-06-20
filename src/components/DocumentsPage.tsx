@@ -80,15 +80,15 @@ const DocumentsPage: React.FC = () => {
               <DocumentTable
                 documents={documents}
                 onDelete={handleDelete}
-<<<<<<< HEAD
-                onRename={function (_id: string, newName: string): void {
-=======
-                onRename={function (_id: string): void {
->>>>>>> e6c9d57 (task done)
-                  throw new Error("Function not implemented.");
+                onRename={(_id: string, newName: string): void => {
+                  setDocuments((prev) =>
+                    prev.map((doc) =>
+                      doc.id === _id ? { ...doc, title: newName } : doc
+                    )
+                  );
                 }}
-                onPreview={function (id: string): void {
-                  throw new Error("Function not implemented.");
+                onPreview={(id: string): void => {
+                  alert(`Preview document with id: ${id}`);
                 }}
               />
             </TabPane>

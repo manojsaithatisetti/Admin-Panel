@@ -1,17 +1,10 @@
-
-<<<<<<< HEAD
-const PreviewModal  = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default PreviewModal 
-=======
 import { Modal } from 'antd';
-import { FilePdfOutlined, FileWordOutlined, FileImageOutlined, FileTextOutlined } from '@ant-design/icons';
+import {
+  FilePdfOutlined,
+  FileWordOutlined,
+  FileImageOutlined,
+  FileTextOutlined,
+} from '@ant-design/icons';
 
 interface CustomDocument {
   filename: string;
@@ -29,7 +22,7 @@ interface PreviewModalProps {
 const PreviewModal = ({ visible, document, onCancel }: PreviewModalProps) => {
   const getFileIcon = () => {
     if (!document) return <FileTextOutlined />;
-    
+
     const type = document.fileType.toLowerCase();
     if (type === 'pdf') return <FilePdfOutlined />;
     if (['doc', 'docx'].includes(type)) return <FileWordOutlined />;
@@ -69,4 +62,3 @@ const PreviewModal = ({ visible, document, onCancel }: PreviewModalProps) => {
 };
 
 export default PreviewModal;
->>>>>>> e6c9d57 (task done)

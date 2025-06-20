@@ -27,17 +27,10 @@ const Sidebar = () => {
       collapsible
       collapsed={isSidebarCollapsed}
       width={250}
-      
       className="h-screen bg-blue border-r"
     >
       <div className="flex items-center justify-between p-4">
-        {!isSidebarCollapsed && (
-<<<<<<< HEAD
-          <h1>Admin</h1>
-=======
-          <h1></h1>
->>>>>>> e6c9d57 (task done)
-        )}
+        {!isSidebarCollapsed && <h1>Admin</h1>}
         <button onClick={toggleSidebar} className="text-gray-500">
           {isSidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </button>

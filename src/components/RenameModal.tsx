@@ -1,15 +1,3 @@
-
-<<<<<<< HEAD
-const RenameModal = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default RenameModal
-=======
 import React, { useState, useEffect } from "react";
 import { Modal, Input } from "antd";
 
@@ -20,12 +8,12 @@ interface RenameModalProps {
   onRename: (newName: string) => void;
 }
 
-const RenameModal = ({
+const RenameModal: React.FC<RenameModalProps> = ({
   visible,
   initialName,
   onCancel,
   onRename,
-}: RenameModalProps) => {
+}) => {
   const [newName, setNewName] = useState(initialName);
 
   useEffect(() => {
@@ -33,7 +21,9 @@ const RenameModal = ({
   }, [initialName]);
 
   const handleOk = () => {
-    onRename(newName);
+    if (newName.trim()) {
+      onRename(newName.trim());
+    }
   };
 
   return (
@@ -48,11 +38,10 @@ const RenameModal = ({
         value={newName}
         onChange={(e) => setNewName(e.target.value)}
         placeholder="Enter new name"
+        autoFocus
       />
     </Modal>
   );
 };
 
 export default RenameModal;
-
->>>>>>> e6c9d57 (task done)
