@@ -80,7 +80,11 @@ const DocumentsPage: React.FC = () => {
               <DocumentTable
                 documents={documents}
                 onDelete={handleDelete}
+<<<<<<< HEAD
                 onRename={function (_id: string, newName: string): void {
+=======
+                onRename={function (_id: string): void {
+>>>>>>> e6c9d57 (task done)
                   throw new Error("Function not implemented.");
                 }}
                 onPreview={function (id: string): void {
